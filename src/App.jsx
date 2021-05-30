@@ -1,7 +1,9 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 
 import CountriesList from "./components/CountriesList";
+import Header from "./components/Header";
+import SearchBar from "./components/SearchBar";
 
 function App() {
   const [countries, setCountries] = useState({
@@ -20,9 +22,13 @@ function App() {
   }, [setCountries]);
 
   return (
-    <div className="App">
-      <CountriesList repos={countries.repos} />
-    </div>
+    <React.Fragment>
+      <Header />
+      <div className="wrapper">
+        <SearchBar />
+        <CountriesList repos={countries.repos} />
+      </div>
+    </React.Fragment>
   );
 }
 

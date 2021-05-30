@@ -14,13 +14,13 @@ const CountriesList = (props) => {
                 <h2>{repo.name}</h2>
               </li>
               <li>
-                <strong>Population:</strong> {repo.population}
+                <span>Population:</span> {repo.population}
               </li>
               <li>
-                <strong>Region:</strong> {repo.region}
+                <span>Region:</span> {repo.region}
               </li>
               <li>
-                <strong>Capital:</strong> {repo.capital}
+                <span>Capital:</span> {repo.capital}
               </li>
             </ul>
           </div>
