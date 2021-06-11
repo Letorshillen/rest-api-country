@@ -5,7 +5,7 @@ const Header = () => {
   return (
     <header>
       <div className="wrapper flex">
-        <h1>Where in the World?</h1>
+        <h1>Where in the world?</h1>
         <button>
           <BsMoon /> Dark Mode
         </button>

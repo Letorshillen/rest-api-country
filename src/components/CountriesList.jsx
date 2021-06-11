@@ -7,7 +7,13 @@ const CountriesList = (props) => {
     <div className="grid">
       {repos.map((repo, index) => {
         return (
-          <div className="country-box" key={index}>
+          <div
+            className="country-box"
+            key={index}
+            onClick={() => {
+              props.openFile(index);
+            }}
+          >
             <img src={repo.flag} alt={repo.name} />
             <ul>
               <li>

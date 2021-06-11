@@ -37,6 +37,8 @@ nav {
   display: flex;
   justify-content: space-between;
   margin-bottom: 40px;
+  flex-wrap: wrap;
+  row-gap: 20px;
 }
 
 .searchbar {
@@ -57,9 +59,45 @@ nav {
   outline: 0;
   color: inherit;
 }
+
 .searchbar input::placeholder {
   font-family: "Nunito Sans", sans-serif;
   color: inherit;
+}
+
+.dropdown {
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.274);
+  font-size: 14px;
+}
+
+.dropdown-toggle {
+  background-color: hsl(209, 23%, 22%);
+  border: none;
+  color: inherit;
+  width: 180px;
+  font-family: inherit;
+  padding: 18px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 14px;
+}
+
+.dropdown-menu {
+  display: flex;
+  flex-direction: column;
+  background-color: hsl(209, 23%, 22%);
+  width: 180px;
+  padding: 18px;
+  border-radius: 4px;
+  gap: 4px;
+  top: 3px !important;
+}
+
+.dropdown-item {
+  color: inherit;
+  text-decoration: none;
 }
 
 .flex {
