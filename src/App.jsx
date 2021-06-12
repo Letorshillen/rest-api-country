@@ -22,7 +22,7 @@ function App() {
     fetch(apiUrl)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data[1]);
+        console.log(data);
         setCountries({ loading: false, repos: data });
       });
   }, [setCountries]);
@@ -33,6 +33,10 @@ function App() {
     setShowFile(true);
   };
 
+  const closeFileHandler = () => {
+    setShowFile(false);
+  };
+
   if (!countries.repos || countries.repos.length === 0) return <p>no repos</p>;
   return (
     <React.Fragment>
@@ -40,6 +44,7 @@ function App() {
       <div className="wrapper">
         {showFile ? (
           <CountryFile
+            flag={file.flag}
             name={file.name}
             nativeName={file.nativeName}
             population={file.population}
@@ -47,10 +52,10 @@ function App() {
             subregion={file.subregion}
             capital={file.capital}
             topLevelDomain={file.topLevelDomain}
-            topLevelDomain={file.topLevelDomain}
-            // currencies={file.currencies}
-            // lanugages={file.lanugages}
-            // borders={file.borders}
+            currencies={file.currencies}
+            languages={file.languages}
+            borders={file.borders}
+            closeFile={closeFileHandler}
           />
         ) : (
           <React.Fragment>

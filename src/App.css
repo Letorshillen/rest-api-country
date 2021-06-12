@@ -119,6 +119,7 @@ nav {
   border-radius: 2%;
   width: 100%;
   padding-bottom: 30px;
+  height: 320px;
 }
 
 .country-box img {
@@ -127,21 +128,81 @@ nav {
   object-fit: cover;
 }
 
-.country-box ul {
+ul {
   font-size: 14px;
   padding: 0 30px;
   list-style: none;
 }
 
-.country-box li {
+li {
   font-weight: 200;
   margin: 4px 0;
 }
 
-.country-box span {
+span {
   font-weight: 600;
 }
 
-.country-box h2 {
+h2 {
   margin-bottom: 20px;
+}
+
+.flexFile {
+  display: flex;
+  gap: 15%;
+  justify-content: space-evenly;
+}
+
+.backBtn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 0;
+  background-color: hsl(209, 23%, 22%);
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.274);
+  padding: 8px 24px;
+  width: 110px;
+  color: inherit;
+  font-family: inherit;
+  border-radius: 4px;
+  font-size: 16px;
+  margin-bottom: 80px;
+  cursor: pointer;
+}
+
+.icon {
+  font-size: 20px;
+}
+
+.flag {
+  width: 45%;
+  height: 350px;
+  object-fit: cover;
+}
+
+.infoWrapper {
+  padding: 30px 0;
+  width: 50%;
+}
+
+.infoWrapper ul {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+  padding-bottom: 40px;
+}
+
+.infoWrapper li {
+  width: 50%;
+  margin-top: 8px;
+}
+
+.infoInner {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.borderWrapper {
+  width: 100%;
+  padding: 30px 0;
 }
