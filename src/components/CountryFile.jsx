@@ -1,9 +1,10 @@
 import React from "react";
-
 import { HiArrowNarrowLeft } from "react-icons/hi";
+import FileLoader from "./FileLoader";
 
 const CountryFile = (props) => {
-  const { repos } = props;
+  const { repos, file } = props;
+  if (file === undefined || file.length === 0) return <FileLoader />;
   return (
     <React.Fragment>
       <button className="backBtn" onClick={props.closeFile}>

@@ -2,7 +2,6 @@ import React from "react";
 
 const CountriesList = (props) => {
   const { repos } = props;
-  if (repos.status === 404) return <p>No country found</p>;
   return (
     <div className="grid">
       {repos.map((repo, index) => {
@@ -11,7 +10,7 @@ const CountriesList = (props) => {
             className="country-box"
             key={index}
             onClick={() => {
-              props.openFile(index);
+              props.openFile(repo.name);
             }}
           >
             <img loading="lazy" src={repo.flag} alt={repo.name} />

@@ -11,7 +11,8 @@ $light-elements: white;
 .App {
   transition: all 0.2s ease;
   width: 100%;
-  height: 100vh;
+  height: 100%;
+  color: white;
   background-color: $dark-bg;
 }
 
