@@ -3,6 +3,7 @@ import React from "react";
 import { HiArrowNarrowLeft } from "react-icons/hi";
 
 const CountryFile = (props) => {
+  const { repos } = props;
   return (
     <React.Fragment>
       <button className="backBtn" onClick={props.closeFile}>
@@ -70,9 +71,20 @@ const CountryFile = (props) => {
             </ul>
             <div className="borderWrapper">
               <span>Border Countries:</span>
-              {props.borders.map((borders, index) => {
-                return <p key={index}>{borders}</p>;
-              })}
+              <div>
+                {props.borders.length === 0 ? (
+                  <span>none</span>
+                ) : (
+                  props.borders.map((borders, index) => {
+                    for (let i = 0; i < repos.length; i++) {
+                      if (borders === repos[i].alpha3Code) {
+                        return <span key={index}>{repos[i].name}</span>;
+                      }
+                    }
+                    return null;
+                  })
+                )}
+              </div>
             </div>
           </div>
         </div>

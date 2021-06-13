@@ -1,31 +1,38 @@
 import React, { useEffect, useState } from "react";
-import "./App.css";
-import CountryFile from "./components/CountryFile";
 
+import "./App.scss";
+
+import CountryFile from "./components/CountryFile";
 import CountriesList from "./components/CountriesList";
 import Header from "./components/Header";
 import SearchBar from "./components/SearchBar";
 
 function App() {
+  const [apiUrl, setApiUrl] = useState("https://restcountries.eu/rest/v2/all");
   const [countries, setCountries] = useState({
-    loading: false,
     repos: null,
   });
-
+  const [searchValue, setSearchValue] = useState("");
+  const [filterValue, setFilterValue] = useState("");
   const [showFile, setShowFile] = useState(false);
-
   const [file, setFile] = useState();
+  const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
-    setCountries({ loading: true });
-    const apiUrl = "https://restcountries.eu/rest/v2/all";
     fetch(apiUrl)
-      .then((response) => response.json())
+      .then((response) => {
+        if (response.status === 404) {
+          console.log("Country doesnt exist");
+          return response.json();
+        } else {
+          return response.json();
+        }
+      })
       .then((data) => {
         console.log(data);
-        setCountries({ loading: false, repos: data });
+        setCountries({ repos: data });
       });
-  }, [setCountries]);
+  }, [apiUrl]);
 
   const openFileHandler = (index) => {
     const fileNew = countries.repos[index];
@@ -37,10 +44,40 @@ function App() {
     setShowFile(false);
   };
 
-  if (!countries.repos || countries.repos.length === 0) return <p>no repos</p>;
+  const searchInputHandler = (e) => {
+    const searchInput = e.target.value;
+    setSearchValue(searchInput);
+
+    const searchUrl = `https://restcountries.eu/rest/v2/name/${searchInput}`;
+    setApiUrl(searchUrl);
+
+    if (searchInput === "") {
+      setApiUrl("https://restcountries.eu/rest/v2/all");
+    }
+  };
+
+  const filterHandler = (region) => {
+    const filter = region;
+    setFilterValue(filter);
+
+    const searchUrl = `https://restcountries.eu/rest/v2/region/${filter}`;
+    setApiUrl(searchUrl);
+
+    if (filter === filterValue) {
+      setFilterValue("");
+      setApiUrl("https://restcountries.eu/rest/v2/all");
+    }
+  };
+
+  const changeColorHandler = () => {
+    setDarkMode(!darkMode);
+  };
+
+  if (!countries.repos || countries.repos.length === 0)
+    return <p>Loading...</p>;
   return (
-    <React.Fragment>
-      <Header />
+    <div className={`App ${darkMode ? `light` : ``}`}>
+      <Header changeColor={changeColorHandler} />
       <div className="wrapper">
         {showFile ? (
           <CountryFile
@@ -56,15 +93,21 @@ function App() {
             languages={file.languages}
             borders={file.borders}
             closeFile={closeFileHandler}
+            repos={countries.repos}
           />
         ) : (
           <React.Fragment>
-            <SearchBar />
+            <SearchBar
+              searchValue={searchValue}
+              search={searchInputHandler}
+              filter={filterHandler}
+              filterValue={filterValue}
+            />
             <CountriesList repos={countries.repos} openFile={openFileHandler} />
           </React.Fragment>
         )}
       </div>
-    </React.Fragment>
+    </div>
   );
 }
 
