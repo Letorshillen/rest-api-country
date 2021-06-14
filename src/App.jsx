@@ -14,7 +14,7 @@ function App() {
   const [filterValue, setFilterValue] = useState("");
   const [showFile, setShowFile] = useState(false);
 
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(true);
 
   // useEffect(() => {
   //   const apiUrl = "https://restcountries.eu/rest/v2/all";
@@ -68,31 +68,41 @@ function App() {
   const searchHandler = (data) => {
     if (searchValue === "" && filterValue === "") {
       return data;
-    } else if (filterValue != "") {
+    } else if (filterValue !== "") {
       return data.filter((data) =>
         data.region.toLowerCase().includes(filterValue)
       );
-    } else if (searchValue != "") {
+    } else if (searchValue !== "") {
       return data.filter(
         (data) =>
           data.name.toLowerCase().includes(searchValue) ||
           data.nativeName.toLowerCase().includes(searchValue)
       );
+    } else if (filterValue !== "" && searchValue !== "") {
+      return data.filter(
+        (data) =>
+          (data.region.toLowerCase().includes(filterValue) &&
+            data.name.toLowerCase().includes(searchValue)) ||
+          data.nativeName.toLowerCase().includes(searchValue)
+      );
     }
-    // else if (filterValue != "" && searchValue != "") {
-    //   return;
-    // }
   };
 
   const changeColorHandler = () => {
     setDarkMode(!darkMode);
   };
 
+  if (darkMode) {
+    document.body.style = "background: #202c37;";
+  } else {
+    document.body.style = "background: #fafafa;";
+  }
+
   if (!countries.repos || countries.repos.length === 0)
     return <p>Loading...</p>;
   return (
-    <div className={`App ${darkMode ? `light` : ``}`}>
-      <Header changeColor={changeColorHandler} />
+    <div className={`App ${!darkMode ? `light` : ``}`}>
+      <Header changeColor={changeColorHandler} darkMode={darkMode} />
       <div className="wrapper">
         {showFile ? (
           <CountryFile
